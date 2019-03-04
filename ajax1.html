@@ -20,6 +20,8 @@
             // OPEN - type, url/file, async
             xhr.open('GET', 'sample.txt', true);
 
+            console.log('READYSTATE: ', xhr.readyState);
+
             // xhr.onload = function(){
             //   if(this.status == 200){
             //     console.log(this.responseText);
@@ -27,15 +29,16 @@
             // }
 
             xhr.onreadystatechange = function(){
+                console.log('READYSTATE: ', xhr.readyState);
                 if(this.readyState == 4 && this.status == 200){
-                  console.log(this.responseText);
+                //   console.log(this.responseText);
                 }
             }
             // Sends request
             xhr.send();
         }
 
-        
+
         // readyState Values
         // 0: request not initialized
         // 1: server connection established
