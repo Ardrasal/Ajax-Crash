@@ -8,7 +8,9 @@
 </head>
 <body>
     <button id="button">Get Text File</button>
+    <br><br>
 
+    <div id=text></div>
     <script>
         // Create event listener
         document.getElementById('button').addEventListener('click', loadText);
@@ -22,18 +24,29 @@
 
             console.log('READYSTATE: ', xhr.readyState);
 
-            // xhr.onload = function(){
-            //   if(this.status == 200){
-            //     console.log(this.responseText);
-            //     }
-            // }
-
-            xhr.onreadystatechange = function(){
+            // Optional - used for loaders
+            xhr.onprogress = function(){
                 console.log('READYSTATE: ', xhr.readyState);
-                if(this.readyState == 4 && this.status == 200){
-                //   console.log(this.responseText);
+            }
+
+            xhr.onload = function(){
+                console.log('READYSTATE: ', xhr.readyState);
+              if(this.status == 200){
+                // console.log(this.responseText);
+                document.getElementById('text').innerHTML = this.responseText;
                 }
             }
+
+            xhr.oneerror = function(){
+                console.log('Request Error...');
+            }
+
+            // xhr.onreadystatechange = function(){
+            //     console.log('READYSTATE: ', xhr.readyState);
+            //     if(this.readyState == 4 && this.status == 200){
+            //     //   console.log(this.responseText);
+            //     }
+            // }
             // Sends request
             xhr.send();
         }
